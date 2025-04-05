@@ -27,7 +27,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <Timer/TimerMicro.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,7 +48,22 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+SerialHandler_Instance_t gVcpHandler =
+{
+	.pUsart = &huart2,
 
+	.pBuffer = NULL,
+	.bufferSize = 0,
+
+	.triggerOnTimeout = false,
+	.timeoutBitsCount = 0,
+
+	.triggerOnStopBytes = false,
+	.pStopBytes = NULL,
+	.stopBytesSize = 0,
+
+	.pListenerCallback = NULL
+};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -99,13 +114,25 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
-
+  TimerMicro_Init(&htim2);
+  SerialHandler_Init(&gVcpHandler);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  const char message[] = "Hello World!\r\n";
+  TimerMicro_t timer;
+  TimerMicro_Reset(&timer);
   while (1)
   {
+	if(TimerMicro_Check(&timer) >= 500000)
+	{
+		while(SerialHandler_IsTxBusy(&gVcpHandler));
+		assert_param(SerialHandler_SendData(&gVcpHandler, (uint8_t *)message, sizeof(message)) == SUCCESS);
+
+		TimerMicro_Reset(&timer);
+	}
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
