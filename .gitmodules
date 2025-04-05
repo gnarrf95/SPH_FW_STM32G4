@@ -1,0 +1,3 @@
+[submodule "Libs/ModbusEmbedded"]
+	path = Libs/ModbusEmbedded
+	url = git@github.com:gnarrf95/ModbusEmbedded.git
