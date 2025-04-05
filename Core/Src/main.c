@@ -27,6 +27,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
+#include <Logger.h>
 #include <Timer/TimerMicro.h>
 /* USER CODE END Includes */
 
@@ -127,10 +129,12 @@ int main(void)
   {
 	if(TimerMicro_Check(&timer) >= 500000)
 	{
+		TimerMicro_Reset(&timer);
+		LOG_INFO("HELLO");
+
 		while(SerialHandler_IsTxBusy(&gVcpHandler));
 		assert_param(SerialHandler_SendData(&gVcpHandler, (uint8_t *)message, sizeof(message)) == SUCCESS);
 
-		TimerMicro_Reset(&timer);
 	}
 
     /* USER CODE END WHILE */
@@ -187,7 +191,27 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+int _write(int le, char *ptr, int len)
+{
+	int DataIdx;
 
+	for(DataIdx = 0; DataIdx < len; DataIdx++)
+	{
+		ITM_SendChar(*ptr++);
+	}
+
+	return len;
+}
+
+uint32_t Logger_GetTimestamp(void)
+{
+	return __HAL_TIM_GET_COUNTER(&htim2);
+}
+
+void Platform_OutputEnable(bool enable)
+{
+	HAL_GPIO_WritePin(LOAD_SHUTDOWN_GPIO_Port, LOAD_SHUTDOWN_Pin, enable ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
 /* USER CODE END 4 */
 
 /**
@@ -199,8 +223,11 @@ void Error_Handler(void)
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
+  Platform_OutputEnable(false);
   while (1)
   {
+	  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+	  HAL_Delay(250);
   }
   /* USER CODE END Error_Handler_Debug */
 }
@@ -218,6 +245,9 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+
+  Logger_LogMessageTrace(LOGGER_VERBOSITY_ERROR, (const char *)file, line, "assert_param() failed.");
+  Error_Handler();
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

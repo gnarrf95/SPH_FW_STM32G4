@@ -37,6 +37,8 @@
 									<listOptionValue builtIn="false" value="../Libs/ModbusEmbedded/Inc"/>
 									<listOptionValue builtIn="false" value="../Platform/Timer"/>
 									<listOptionValue builtIn="false" value="../Platform"/>
+									<listOptionValue builtIn="false" value="../Libr/Logger"/>
+									<listOptionValue builtIn="false" value="../Libs/Logger"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.314317666" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -56,6 +58,7 @@
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
 									<listOptionValue builtIn="false" value="../Libs/ModbusEmbedded/Inc"/>
 									<listOptionValue builtIn="false" value="../Platform"/>
+									<listOptionValue builtIn="false" value="../Libs/Logger"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.264965675" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -124,6 +127,8 @@
 									<listOptionValue builtIn="false" value="../Libs/ModbusEmbedded/Inc"/>
 									<listOptionValue builtIn="false" value="../Platform/Timer"/>
 									<listOptionValue builtIn="false" value="../Platform"/>
+									<listOptionValue builtIn="false" value="../Libr/Logger"/>
+									<listOptionValue builtIn="false" value="../Libs/Logger"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.1494391270" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -144,6 +149,8 @@
 									<listOptionValue builtIn="false" value="../Libs/ModbusEmbedded/Inc"/>
 									<listOptionValue builtIn="false" value="../Platform/Timer"/>
 									<listOptionValue builtIn="false" value="../Platform"/>
+									<listOptionValue builtIn="false" value="../Libr/Logger"/>
+									<listOptionValue builtIn="false" value="../Libs/Logger"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.422055302" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>

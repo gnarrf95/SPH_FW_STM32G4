@@ -53,7 +53,7 @@ extern SerialHandler_Instance_t gVcpHandler;
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+void Platform_OutputEnable(bool enable);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

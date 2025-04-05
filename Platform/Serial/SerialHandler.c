@@ -12,6 +12,9 @@
 
 #include <main.h>
 
+
+
+
 #define USART_INSTANCE		pThis->pUsart->Instance
 
 #define DMARX_INSTANCE		pThis->pUsart->hdmarx->DmaBaseAddress
